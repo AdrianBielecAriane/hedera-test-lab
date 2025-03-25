@@ -1,5 +1,5 @@
 import './App.css';
-import { useAppKitAccount } from '@reown/appkit/react';
+import { useAppKit, useAppKitAccount } from '@reown/appkit/react';
 import { Connect } from './components/connect';
 import { hederaTestnet } from '@reown/appkit/networks';
 import { Toaster } from 'sonner';
@@ -34,6 +34,7 @@ createAppKit({
 
 function App() {
   const { isConnected } = useAppKitAccount();
+  const { open } = useAppKit();
   const [view, setView] = useState<View>('show-balance');
 
   if (!isConnected) {
@@ -42,6 +43,9 @@ function App() {
 
   return (
     <div>
+      <button style={{ marginBottom: 10 }} type="button" onClick={() => open({ view: 'Account' })}>
+        Open wallet-connect modal
+      </button>
       <Toaster richColors />
       <select
         style={{ width: '100%', padding: '4px', marginBottom: '16px' }}
